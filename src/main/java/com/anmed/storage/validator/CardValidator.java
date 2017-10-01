@@ -39,20 +39,20 @@ public class CardValidator implements Validator {
     @Override
     public void validate(Object instance, Errors errors) {
         Card card = (Card) instance;
-        int currentYear = LocalDateTime.now().getYear();
+        int currentYear = LocalDateTime.now().getYear() % 100;
 
         validateString(card.getCardHolder(), errors, "cardHolder", NOT_CHAR_WHITE_SPACE_REGEX);
         validateCardNumber(card.getCardNumber(), errors, "cardNumber", NOT_NUMB_WHITE_SPACE_REGEX);
 
-        if (card.getExpiryYear() < 0 || card.getExpiryYear() > 2100 ||
+        if (card.getExpiryYear() < 0 || card.getExpiryYear() > 99 ||
                 card.getExpiryMonth() < 1 || card.getExpiryMonth() > 12) {
-            errors.rejectValue("expiryYear", "malformed.expiry.date");
+            errors.rejectValue("expiration", "malformed.expiry.date");
         }
         if (card.getExpiryYear() < currentYear) {
             errors.rejectValue("expiryYear", "card.expired.exception");
         } else if (card.getExpiryYear() == currentYear &&
                 card.getExpiryMonth() < LocalDateTime.now().getMonth().getValue()) {
-            errors.rejectValue("expiryYear", "card.expired.exception");
+            errors.rejectValue("expiryMonth", "card.expired.exception");
         }
 
         card = cardService.findCardByNumber(card.getCardNumber().trim());

@@ -24,7 +24,7 @@
     <span th:each="card : ${cards}">
         <tr><td th:text="${card.cardId}">Card id in DB </td></tr>
         <tr><td th:text="${card.cardNumber}">Card number</td></tr>
-        <tr><td><span th:text="${card.expiryMonth}"></span>/<span th:utext="${card.expiryYear}"></span></td></tr>
+        <tr><td><span th:utext="${card.expiryYear}"></span>/<span th:text="${card.expiryMonth}"></span></td></tr>
         <tr><td th:text="${card.cardHolder}">John Doe</td></tr>
     </span>
 </table>
