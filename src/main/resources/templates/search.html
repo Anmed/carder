@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register a card</title>
+    <link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body>
+
+<div id="cardContainer">
+    <form th:action="@{/search}" method="post">
+
+        <div>
+            <input type="text" name="searchItem" id="searchItem"
+                   placeholder="card number" required="true" autofocus="true"/>
+        </div>
+        <button class="button" type="submit">Find them</button>
+        <a href="/card" class="button">Add another card</a>
+    </form>
+</div>
+
+<table id="foundCards" th:if="${cards != null and cards.size() > 0}">
+    <span th:each="card : ${cards}">
+        <tr><td th:text="${card.cardId}">Card id in DB </td></tr>
+        <tr><td th:text="${card.cardNumber}">Card number</td></tr>
+        <tr><td><span th:text="${card.expiryMonth}"></span>/<span th:utext="${card.expiryYear}"></span></td></tr>
+        <tr><td th:text="${card.cardHolder}">John Doe</td></tr>
+    </span>
+</table>
+
+
+</body>
+</html>
