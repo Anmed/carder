@@ -57,6 +57,8 @@ public class CardValidator implements Validator {
 
         card = cardService.findCardByNumber(card.getCardNumber().trim());
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //since admin user was hardcoded  in properties,
+        // also could be done using preload script and then verify admin rights
         if (user.getUsername().equals("admin")) {
             errors.rejectValue("cardNumber", "admin.card.exception");
         } else if (card != null && !card.getUser().getName().equalsIgnoreCase(user.getUsername())) {

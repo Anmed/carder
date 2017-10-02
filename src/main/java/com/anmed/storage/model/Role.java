@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-/**
- * Created by adementiev on 21/09/2017.
- */
 @Entity
 @Data
 @Table(
